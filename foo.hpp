@@ -6,17 +6,21 @@
 #include <list>
 #include <vector>
 
+char uOperation(const Human& h)
+{
+    if (h.isMonster())
+        return 'n';
+    else
+        return 'y';
+}
 std::vector< char > foo(std::list< Human >& people)
 {
     std::vector< char > retval(people.size());
 
-    // Inkrementacja wieku dla ka¿dej osoby
-    std::for_each(people.begin(), people.end(), [](Human& person) { person.birthday(); });
+    // Twoja implementacja tutaj
+    std::for_each(people.begin(), people.end(), [](Human& h) { h.birthday(); });
 
-    // Wype³nianie wektora 'retval' zgodnie z warunkami
-    std::transform(people.rbegin(), people.rend(), retval.begin(), [](const Human& person) {
-        return person.isMonster() ? 'y' : 'n';
-    });
+    std::transform(people.rbegin(), people.rend(), retval.begin(), uOperation);
 
     return retval;
 }
